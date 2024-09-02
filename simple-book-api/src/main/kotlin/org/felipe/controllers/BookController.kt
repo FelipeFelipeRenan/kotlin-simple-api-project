@@ -27,4 +27,10 @@ class LivroResource(val livrosService: LivrosService) {
     fun test() : String {
         return "Hello world"
     }
+
+    @GET
+    @Path("/{id}")
+    fun findById(@PathParam("id") id: Long) : Response {
+        val livro = livrosService.find
+    }
 }
