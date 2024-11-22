@@ -45,4 +45,5 @@ class LivroResource(val livrosService: LivrosService) {
         livrosService.deleteLivro(id)
         return Response.status(Response.Status.NO_CONTENT).build()
     }
+        
 }
