@@ -22,7 +22,7 @@ class LivroResource(val livrosService: LivrosService) {
     fun test(): String {
         return "Hello world"
     }
-
+    
     @GET fun listarLivros(): List<Livro> = livrosService.listAllLivros()
 
     @GET

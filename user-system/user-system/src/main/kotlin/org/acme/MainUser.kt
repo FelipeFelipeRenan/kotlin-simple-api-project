@@ -11,4 +11,9 @@ class MainUser {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     fun hello() = "Hello from Quarkus REST"
+
+    @GET
+    @Produces(MediaType.JSON)
+
+
 }
