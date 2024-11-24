@@ -9,7 +9,7 @@ import java.time.LocalDate
 
 @Entity
 @Table(name = "emprestimos")
-data class emprestimo(
+data class Emprestimo(
 
     @ManyToOne(fetch = FetchType.LAZY) 
     @JoinColumn(name = "usuario_id")
