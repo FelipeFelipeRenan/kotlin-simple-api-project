@@ -2,19 +2,16 @@ package org.acme.service
 
 import org.acme.repository.UsuarioRepository
 import org.acme.repository.EmprestimoRepository
-<<<<<<< HEAD
 import org.acme.adapter.LivroRestClient
 import org.acme.model.Emprestimo
+import org.acme.model.Usuario
 import org.jboss.resteasy.reactive.common.model.RestClientInterface
 import org.eclipse.microprofile.rest.client.inject.RestClient
-=======
-import org.jboss.resteasy.reactive.common.model.RestClientInterface
->>>>>>> a7d7259f41b9ac16803d253e2820929bf43d4a9e
+import java.time.LocalDate
 
 class UsuarioService(
     val usuarioRepository: UsuarioRepository,
     val emprestimoRepository: EmprestimoRepository,
-<<<<<<< HEAD
     
     @RestClient val livroClient: LivroRestClient
 
@@ -27,16 +24,39 @@ class UsuarioService(
         if(livro.status != "DISPONIVEL" ) return false
 
         val emprestimo = Emprestimo(usuario = usuario, livroId = livroId)
-        EmprestimoRepository.persist(emprestimo)
+        emprestimoRepository.persist(emprestimo)
 
         livroClient.reservarLivro(livroId, usuarioId)
         
         return true
     }
-=======
 
-    // TODO 
-){
-    
->>>>>>> a7d7259f41b9ac16803d253e2820929bf43d4a9e
+
+    fun devolverLivro(emprestimoId: Long): Boolean{
+        val emprestimo = emprestimoRepository.findById(emprestimoId) ?: return false
+        
+        if (emprestimo.status != "EM ANDAMENTO") return false
+
+        // emprestimo finalizado
+        emprestimo.status =  "FINALIZADO"
+        emprestimo.dataDevolução = LocalDate.now()
+
+        // atualiza status do livro para disponivel
+        livroClient.atualizarStatusLivro(emprestimo.livroId, "DISPONIVEL")
+
+        // atualiza pontos do usuario
+        val usuario = emprestimo.usuario
+        usuario.pontos += 10
+        usuarioRepository.persist(usuario)
+
+        return true
+    }
+
+    fun listarEmprestimos(usuarioId: Long) : List<Emprestimo>{
+        return emprestimoRepository.list("usuario.id", usuarioId)
+    }
+
+    fun listarUsuariosMaisAtivos(): List<Usuario> {
+        return usuarioRepository.list("ORDER BY pontos DESC").take(5)
+    }
 }
