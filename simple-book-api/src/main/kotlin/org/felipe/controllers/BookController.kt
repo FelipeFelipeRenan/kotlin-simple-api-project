@@ -41,9 +41,15 @@ class LivroResource(val livrosService: LivrosService) {
 
     @DELETE
     @Path("/{id}")
-    fun deleteLivro(@PathParam("id") id: Long): Response{
+    fun deleteLivro(@PathParam("id") id: Long): Response {
         livrosService.deleteLivro(id)
         return Response.status(Response.Status.NO_CONTENT).build()
     }
+    @GET
+    @Path("/name/{name}")
+    fun showName(@PathParam("name") name: String): Response {
+        return Response.ok("obrigado por entrar em contato $name").build()
+    }
+
         
 }
