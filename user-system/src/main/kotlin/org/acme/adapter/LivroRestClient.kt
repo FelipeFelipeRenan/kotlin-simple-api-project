@@ -27,4 +27,6 @@ interface LivroRestClient{
     @POST
     @Path("/{id}/atualizar-status")
     fun atualizarStatusLivro(@PathParam("id") id : Long, status: String) : Boolean
+
+
 }

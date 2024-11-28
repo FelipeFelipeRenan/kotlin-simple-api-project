@@ -8,6 +8,7 @@ import org.acme.model.Usuario
 import org.eclipse.microprofile.rest.client.inject.RestClient
 import java.time.LocalDate
 
+
 class UsuarioService(
     val usuarioRepository: UsuarioRepository,
     val emprestimoRepository: EmprestimoRepository,

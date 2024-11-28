@@ -22,5 +22,5 @@ data class Emprestimo(
     var status: String = "EM ANDAMENTO"
 
 ) : PanacheEntity(){
-    constructor(): this(usuario = , livroId= 0, dataEmprestimo = , dataDevolução = null, status = "" )
+     
 }

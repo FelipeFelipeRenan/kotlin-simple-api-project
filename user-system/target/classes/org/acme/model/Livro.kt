@@ -11,7 +11,7 @@ data class Livro(
 
         var title: String,
         var author: String,
-        var isbn: String
+        var isbn: String,
         var status: String = "DISPONIVEL"
         
 ) : PanacheEntity() {

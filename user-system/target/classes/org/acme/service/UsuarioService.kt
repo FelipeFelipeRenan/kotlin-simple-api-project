@@ -5,9 +5,9 @@ import org.acme.repository.EmprestimoRepository
 import org.acme.adapter.LivroRestClient
 import org.acme.model.Emprestimo
 import org.acme.model.Usuario
-import org.jboss.resteasy.reactive.common.model.RestClientInterface
 import org.eclipse.microprofile.rest.client.inject.RestClient
 import java.time.LocalDate
+
 
 class UsuarioService(
     val usuarioRepository: UsuarioRepository,

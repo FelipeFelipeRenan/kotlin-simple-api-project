@@ -8,11 +8,7 @@ import jakarta.persistence.Table
 import jakarta.persistence.OneToMany
 import jakarta.persistence.CascadeType
 import jakarta.persistence.FetchType
-<<<<<<< HEAD
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheEntity
-=======
-import io.quarkus.hibernate.orm.panache.PanacheEntity
->>>>>>> a7d7259f41b9ac16803d253e2820929bf43d4a9e
 
 
 @Entity
