@@ -14,7 +14,7 @@ data class Emprestimo(
 
     @ManyToOne(fetch = FetchType.LAZY) 
     @JoinColumn(name = "usuario_id")
-    val usuario: Usuario,
+    val usuario: Usuario? = null,
     
     val livroId: Long,
     val dataEmprestimo: LocalDate = LocalDate.now(),
@@ -22,5 +22,5 @@ data class Emprestimo(
     var status: String = "EM ANDAMENTO"
 
 ) : PanacheEntity(){
-     
+     constructor() : this(null, 0, LocalDate.now(), null, "EM ANDAMENTO")
 }

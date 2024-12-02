@@ -17,10 +17,11 @@ data class Usuario(
     
     val nome: String,
     val email: String,
+    val senha: String,
     var pontos : Int = 0,
     @OneToMany(mappedBy = "usuario", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     val emprestimos: List<Emprestimo> = mutableListOf()
 
 ) : PanacheEntity () {
-    constructor(): this(nome = "", email = "") 
+    constructor(): this(nome = "", email = "", senha = "") 
 }

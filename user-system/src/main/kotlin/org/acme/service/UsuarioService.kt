@@ -7,8 +7,9 @@ import org.acme.model.Emprestimo
 import org.acme.model.Usuario
 import org.eclipse.microprofile.rest.client.inject.RestClient
 import java.time.LocalDate
+import jakarta.enterprise.context.ApplicationScoped
 
-
+@ApplicationScoped
 class UsuarioService(
     val usuarioRepository: UsuarioRepository,
     val emprestimoRepository: EmprestimoRepository,
@@ -16,6 +17,11 @@ class UsuarioService(
     @RestClient val livroClient: LivroRestClient
 
     ){
+
+    fun listarTodos(): List<Usuario>{
+        val usuarios = usuarioRepository.findAll()
+        return usuarios.list()
+    }
 
     fun emprestarLivro(usuarioId: Long, livroId: Long): Boolean{
         val usuario = usuarioRepository.findById(usuarioId) ?: return false
@@ -46,6 +52,9 @@ class UsuarioService(
 
         // atualiza pontos do usuario
         val usuario = emprestimo.usuario
+        if(usuario == null){
+            throw IllegalArgumentException("Usuario nao pode ser nulo ao devolver livro")
+        }
         usuario.pontos += 10
         usuarioRepository.persist(usuario)
 
