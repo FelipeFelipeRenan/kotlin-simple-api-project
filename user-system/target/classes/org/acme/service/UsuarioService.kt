@@ -23,6 +23,17 @@ class UsuarioService(
         return usuarios.list()
     }
 
+    fun criarUsuario(nome: String, email: String, senha: String): Usuario{
+        val usuario = Usuario(
+            nome = nome,
+            email = email,
+            senha = senha
+        )
+
+        usuario.persist()
+        return usuario
+    }
+
     fun emprestarLivro(usuarioId: Long, livroId: Long): Boolean{
         val usuario = usuarioRepository.findById(usuarioId) ?: return false
         
