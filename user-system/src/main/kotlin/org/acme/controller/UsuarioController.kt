@@ -18,6 +18,13 @@ import org.acme.model.Usuario
 @Consumes(MediaType.APPLICATION_JSON)
 class UsuarioController(val usuarioService: UsuarioService) {
 
+    @GET
+    @Path("/all")
+    fun listarTodos(): Response{
+        return Response.ok(usuarioService.listarTodos()).build()
+    }
+
+
     @POST
     @Path("/{id}/emprestar/{livroId}")
     fun emprestarLivro(@PathParam("id") id: Long, @PathParam("livroId") livroId: Long): Response {
@@ -47,7 +54,7 @@ class UsuarioController(val usuarioService: UsuarioService) {
     }
 
     @GET
-    @Path("/{name}")
+    @Path("/teste/{name}")
     fun testeNome(@PathParam("name") name: String): Response{
         return Response.ok(name).build()
     }

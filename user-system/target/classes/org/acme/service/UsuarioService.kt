@@ -8,6 +8,7 @@ import org.acme.model.Usuario
 import org.eclipse.microprofile.rest.client.inject.RestClient
 import java.time.LocalDate
 import jakarta.enterprise.context.ApplicationScoped
+import jakarta.transaction.Transactional
 
 @ApplicationScoped
 class UsuarioService(
@@ -23,6 +24,7 @@ class UsuarioService(
         return usuarios.list()
     }
 
+    @Transactional
     fun criarUsuario(nome: String, email: String, senha: String): Usuario{
         val usuario = Usuario(
             nome = nome,
@@ -34,6 +36,7 @@ class UsuarioService(
         return usuario
     }
 
+    @Transactional
     fun emprestarLivro(usuarioId: Long, livroId: Long): Boolean{
         val usuario = usuarioRepository.findById(usuarioId) ?: return false
         
@@ -48,7 +51,7 @@ class UsuarioService(
         return true
     }
 
-
+    @Transactional
     fun devolverLivro(emprestimoId: Long): Boolean{
         val emprestimo = emprestimoRepository.findById(emprestimoId) ?: return false
         
